@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerrariaClone", "TerrariaClone.csproj", "{9540F926-DE2C-43CD-9C16-8E40D0FEFB57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9540F926-DE2C-43CD-9C16-8E40D0FEFB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9540F926-DE2C-43CD-9C16-8E40D0FEFB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9540F926-DE2C-43CD-9C16-8E40D0FEFB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9540F926-DE2C-43CD-9C16-8E40D0FEFB57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EC8036D-80C4-4533-8606-AEE56EC5C0D2}
+	EndGlobalSection
+EndGlobal
