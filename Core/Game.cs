@@ -9,15 +9,18 @@ class Game
 	public static Chunk Chunk;
 	public static Cursor Cursor;
 
-	// public static Tilemap Tilemap = new Common.Tilemap(16, 16, 2, 2);
+	public static Entity entity;
 	
 	public static void Initialize()
 	{
 		InitializeWindow();
-        // Tilemap.LoadTexture("Content/Tiles/Tiles_1.png");
 		InitializeContent();
 		TileID.Load();
 		InitializeWorld();
+
+		entity = new Entity();
+		entity.Position = [0, 0];
+		entity.Size = [16 * 2, 16 * 3];
 
 		Cursor = new Cursor();
 		Cursor.X = 0;
@@ -46,11 +49,11 @@ class Game
 
 	public static void InitializeWorld()
 	{
-		Chunk = new Chunk(8, 8);
+		Chunk = new Chunk(25, 25);
 
-		for (int x = 0; x < 8; x++)
+		for (int x = 0; x < 25; x++)
 		{
-			for (int y = 4; y < 8; y++)
+			for (int y = 15; y < 25; y++)
 			{
 				Chunk.SetTile(TileID.Stone, x, y);
 			}
@@ -66,24 +69,6 @@ class Game
 
 		Cursor.X += cursorMoveX;
 		Cursor.Y += cursorMoveY;
-
-		// if (Raylib.IsKeyPressed(KeyboardKey.Left))
-		// {
-		// 	Cursor.X -= 1;
-		// }
-		// else if (Raylib.IsKeyPressed(KeyboardKey.Right))
-		// {
-		// 	Cursor.X += 1;
-		// }
-		
-		// if (Raylib.IsKeyPressed(KeyboardKey.Up))
-		// {
-		// 	Cursor.Y -= 1;
-		// }
-		// else if (Raylib.IsKeyPressed(KeyboardKey.Down))
-		// {
-		// 	Cursor.Y += 1;
-		// }
 		
 		if (Raylib.IsKeyPressed(KeyboardKey.Space))
 		{
@@ -107,6 +92,15 @@ class Game
 		{
 			Cursor.TileID = 0;
 		}
+
+		int playerMoveX = Raylib.IsKeyDown(KeyboardKey.D) - Raylib.IsKeyDown(KeyboardKey.A);
+
+		entity.Position[0] += playerMoveX * 2;
+
+		if (Raylib.IsKeyPressed(KeyboardKey.W))
+		{
+			entity.Velocity[1] = -8;
+		}
 	}
 
 	public static void Draw()
@@ -116,6 +110,8 @@ class Game
 		Raylib.ClearBackground(Color.White);
 
 		Chunk.Draw();
+		entity.ApplyPhysics(Chunk);
+		entity.Draw();
 		Chunk.DrawBorders();
 
 		Cursor.DrawRect();

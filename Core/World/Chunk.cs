@@ -12,7 +12,7 @@ class Chunk
 
 	public Chunk(int width, int height)
 	{
-		Data = new List<Tile?>();
+		Data = [];
 		Width = width;
 		Height = height;
 		InitData();
@@ -30,6 +30,38 @@ class Chunk
 		{
 			Data.Add(null);
 		}
+	}
+
+	public Entity[] GetTileHitboxes(int x1, int y1, int x2, int y2)
+	{
+		List<Entity> entTiles = [];
+		
+		for (int x = x1; x < x2; x++)
+		{
+			for (int y = y1; y < y2; y++)
+			{
+				Tile? tile = GetTileBound(x, y);
+
+				if (tile == null)
+				{
+					continue;
+				}
+				
+				int[] pos = [
+					x * Tile.WIDTH,
+					y * Tile.HEIGHT
+				];
+				
+				Entity entTile = new Entity();
+				entTile.ID = tile.ID;
+				entTile.Position = [pos[0], pos[1]];
+				entTile.Size = [Tile.WIDTH, Tile.HEIGHT];
+
+				entTiles.Add(entTile);
+			}
+		}
+
+		return entTiles.ToArray();
 	}
 
 	// ==== Converters ==== //
@@ -63,22 +95,22 @@ class Chunk
 
 	public void SetTile(int id, int x, int y)
 	{
-		Tile tile = new Tile();
-		tile.Tilemap = Content.Tilemaps[TileID.Tilemap[id]];
-		tile.TilemapPos = [1, 1];
-		tile.ID = id;
-		Data[ToIndex(x, y)] = tile;
+        Tile tile = new()
+        {
+            Tilemap = Content.Tilemaps[TileID.Tilemap[id]],
+            TilemapPos = [1, 1],
+            ID = id
+        };
+		
+        Data[ToIndex(x, y)] = tile;
 	}
 
 	public void SetTileBound(int id, int x, int y)
 	{
-		if (!IsPosOut(x, y)) return;
+		if (IsPosOut(x, y))
+			return;
+		
 		SetTile(id, x, y);
-		// Tile tile = new Tile();
-		// tile.Tilemap = Game.Tilemap;
-		// tile.TilemapPos = [1, 1];
-		// tile.ID = id;
-		// Data[ToIndex(x, y)] = tile;
 	}
 
 	public Tile? GetTile(int x, int y)
@@ -134,9 +166,7 @@ class Chunk
 			var x = Tile.WIDTH * pos[0];
 			var y = Tile.HEIGHT * pos[1];
 
-			// Raylib.DrawRectangleLines(x, y, Tile.WIDTH, Tile.HEIGHT, Color.Blue);
 			tile.Tilemap.Draw(x, y, tile.TilemapPos[0], tile.TilemapPos[1]);
-			// Raylib.DrawTexture(tile.Texture, x, y, Color.White);
 		}
 	}
 

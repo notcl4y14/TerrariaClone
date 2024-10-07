@@ -28,7 +28,7 @@ class Content
 	public static bool LoadTilemap(string name, string textureName, int[] tileDimensions, int[] interval)
 	{
 		Tilemap tilemap = new Tilemap(tileDimensions[0], tileDimensions[1], interval[0], interval[1]);
-		tilemap.Texture = _Textures[name];
+		tilemap.Texture = _Textures[textureName];
 
 		if (_Tilemaps.ContainsKey(name))
 		{
