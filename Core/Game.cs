@@ -42,9 +42,11 @@ class Game
 	{
 		Content.LoadTexture("Tiles_0", "Tiles/Tiles_0.png");
 		Content.LoadTexture("Tiles_1", "Tiles/Tiles_1.png");
+		Content.LoadTexture("Tiles_2", "Tiles/Tiles_2.png");
 
 		Content.LoadTilemap("Tiles_0", "Tiles_0", [16, 16], [2, 2]);
 		Content.LoadTilemap("Tiles_1", "Tiles_1", [16, 16], [2, 2]);
+		Content.LoadTilemap("Tiles_2", "Tiles_2", [16, 16], [2, 2]);
 	}
 
 	public static void InitializeWorld()
@@ -87,6 +89,10 @@ class Game
 		if (Raylib.IsKeyPressed(KeyboardKey.One))
 		{
 			Cursor.TileID = 1;
+		}
+		else if (Raylib.IsKeyPressed(KeyboardKey.Two))
+		{
+			Cursor.TileID = 2;
 		}
 		else if (Raylib.IsKeyPressed(KeyboardKey.Zero))
 		{

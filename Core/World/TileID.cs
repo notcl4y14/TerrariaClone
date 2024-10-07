@@ -12,5 +12,6 @@ class TileID
 	{
 		Tilemap.Add("Tiles_0");
 		Tilemap.Add("Tiles_1");
+		Tilemap.Add("Tiles_2");
 	}
 }
